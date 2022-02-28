@@ -68,9 +68,10 @@ class MainScreen(Screen):
         get_currency = requests.get('https://freecurrencyapi.net/api/v2'
                                     '/latest?apikey=a897bcc0-947e-11ec-88ff-ef8e9477feef&base_currency=' + str(self.country_B_currency))
 
-        self.value = round(float(get_currency.json()['data'][str(self.country_A_currency)]), 1)
+        self.value = float(get_currency.json()['data'][str(self.country_A_currency)])
 
-        self.ids.final_price.text = str(self.value * int(self.cost)) + ' ' + str(self.country_A_currency)
+        self.ids.final_price.text = str(round(self.value * int(self.cost), 2)) + ' ' + str(self.country_A_currency)
+
         pass
 
     pass
