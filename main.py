@@ -64,15 +64,11 @@ class MainScreen(Screen):
         self.cost = int(text)
 
     def price_calculation(self, text):
-        print(self.country_A_currency, self.country_B_currency)
-        print(self.country_A_name, self.country_B_name)
-        print(self.currency_code)
 
         get_currency = requests.get('https://freecurrencyapi.net/api/v2'
                                     '/latest?apikey=a897bcc0-947e-11ec-88ff-ef8e9477feef&base_currency=' + str(self.country_B_currency))
 
         self.value = round(float(get_currency.json()['data'][str(self.country_A_currency)]), 1)
-        print(get_currency.json())
 
         self.ids.final_price.text = str(self.value * int(self.cost)) + ' ' + str(self.country_A_currency)
         pass
