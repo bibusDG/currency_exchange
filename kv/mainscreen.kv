@@ -1,0 +1,106 @@
+#:import utils kivy.utils
+
+<MainScreen>
+    MDFloatLayout: # general overview of main app layout (color, size)
+        canvas:
+            Color:
+                rgb: utils.get_color_from_hex("#45acd1")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        MDGridLayout:
+            rows: 1
+            pos_hint: {'top': 1, 'left': 1}
+            size_hint: 1, .1
+            Label:
+                id: app_name
+                bold: True
+                text: 'CALC YA CURRENCY'
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                font_size: dp(30)
+                font_name: 'Impact'
+        MDGridLayout:
+            id: country_A_grid
+            name: 'country_A_grid'
+            pos_hint: {'top': .8, 'center_x': .5}
+            rows: 5
+            size_hint: .8, .4
+            spacing: 10
+            MDTextField:
+                line_color_focus: 1, 1, 1, 1
+                hint_text: 'Your country'
+                mode: "rectangle"
+                id: input_A
+                name: 'input_A'
+                text: ''
+                text_size: self.size
+                bold: True
+                font_size: dp(25)
+                halign: 'center'
+                multiline: False
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                on_text:
+                    root.currency_country(self.text)
+                    root.text_on_button(self.name)
+                on_text_validate:
+                    root.confirm_country(self.text)
+
+
+            MDTextField:
+                line_color_normal: 0, 0, 0, 1
+                line_color_focus: 1, 1, 1, 1
+                hint_text: 'Destination country'
+                mode: "rectangle"
+                id: input_B
+                name: 'input_B'
+                text: ''
+                text_size: self.size
+                bold: True
+                font_size: dp(25)
+                halign: 'center'
+                multiline: False
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                on_text:
+                    root.currency_country(self.text)
+                    root.text_on_button(self.name)
+                on_text_validate:
+                    root.confirm_country(self.text)
+
+
+            MDTextField:
+                line_color_normal: 0, 0, 0, 1
+                line_color_focus: 1, 1, 1, 1
+                hint_text: 'Price'
+                mode: "rectangle"
+                id: input_C
+                name: 'input_C'
+                text: ''
+                text_size: self.size
+                bold: True
+                font_size: dp(25)
+                halign: 'center'
+                multiline: False
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                on_text_validate:
+                    root.value_cost(self.text)
+
+            MDFillRoundFlatButton:
+                id: calc_button
+                name: 'calc_button'
+                pos_hint: {"center_x": .1, "center_y": .1}
+                text: 48*' ' + 'calculate' + 48 * ' '
+                on_release:
+                    root.price_calculation(self.text)
+
+            Label:
+                id: final_price
+                name: 'final_price'
+                text: ''
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                font_size: dp(30)
+                font_name: 'Impact'
+                color: 1, 1, 1, 1
