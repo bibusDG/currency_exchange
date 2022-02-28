@@ -66,7 +66,7 @@ class MainScreen(Screen):
     def price_calculation(self, text):
 
         get_currency = requests.get('https://freecurrencyapi.net/api/v2'
-                                    '/latest?apikey=a897bcc0-947e-11ec-88ff-ef8e9477feef&base_currency=' + str(self.country_B_currency))
+                                    '/latest?apikey=MYKEY=' + str(self.country_B_currency))
 
         self.value = float(get_currency.json()['data'][str(self.country_A_currency)])
 
